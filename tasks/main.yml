@@ -1,0 +1,11 @@
+---
+- name: run kibana container
+  docker_container:
+    state: started
+    restart: yes
+    recreate: yes
+    name: '{{ kibana_container_name }}'
+    image: '{{ kibana_image }}:{{ kibana_version }}'
+    restart_policy: always
+    links: '{{ kibana_links }}'
+    env: '{{ kibana_env_summary }}'
