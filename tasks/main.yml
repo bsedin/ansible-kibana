@@ -8,4 +8,5 @@
     image: '{{ kibana_image }}:{{ kibana_version }}'
     restart_policy: always
     links: '{{ kibana_links }}'
+    networks: '{{ kibana_networks }}'
     env: '{{ kibana_env_summary }}'
