@@ -1,7 +1,7 @@
 ---
 kibana_container_name: kibana
 kibana_image: docker.elastic.co/kibana/kibana
-kibana_version: 6.2.2
+kibana_version: 6.4.0
 kibana_links: []
 kibana_networks: []
 kibana_elasticsearch_url: http://localhost:9200
