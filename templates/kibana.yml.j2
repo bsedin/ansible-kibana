@@ -1,0 +1,15 @@
+# {{ ansible_managed }}
+
+server.name: kibana
+server.host: "0"
+elasticsearch.hosts: {{ kibana_elasticsearch_hosts | to_yaml }}
+
+{% if kibana_elasticsearch_username is defined %}elasticsearch.username: {{ kibana_elasticsearch_username }}{% endif%}
+
+{% if kibana_elasticsearch_password is defined %}elasticsearch.password: {{ kibana_elasticsearch_password }}{% endif%}
+
+{% if kibana_elasticsearch_password is defined %}
+elasticsearch.requestHeadersWhitelist: []
+elasticsearch.customHeaders:
+  Authorization: Basic {{ (kibana_elasticsearch_username + ':' + kibana_elasticsearch_password) | b64encode }}
+{% endif%}

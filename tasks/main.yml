@@ -1,4 +1,16 @@
 ---
+- name: ensure kibana dir
+  file:
+    dest: '{{ item }}'
+    state: directory
+  with_items:
+    - '{{ kibana_dir }}'
+
+- name: ensure kibana config
+  template:
+    src: kibana.yml.j2
+    dest: '{{ kibana_dir }}/kibana.yml'
+
 - name: run kibana container
   docker_container:
     state: started
@@ -7,6 +19,6 @@
     name: '{{ kibana_container_name }}'
     image: '{{ kibana_image }}:{{ kibana_version }}'
     restart_policy: always
-    links: '{{ kibana_links }}'
     networks: '{{ kibana_networks }}'
-    env: '{{ kibana_env_summary }}'
+    env: '{{ kibana_env }}'
+    volumes: '{{ kibana_volumes }}'
